@@ -3,6 +3,12 @@ A wardrobe like Gorilla Tag's made by Glitched Cat Studios!
 
 ![image](https://github.com/Glitched-Cat-Studios/GCS-Wardrobe/assets/132825368/285d7b87-15bf-4896-b74f-9d7f3efd6041)
 
+# Features
+- Head, Face, Body, and Holdable Tabs!
+- Easy to set up!
+- Uses PlayFab Inventory!
+- Compatible with not just one, but __two__ PhotonVR versions! (0.0.4 and 0.0.5)
+
 # Permissions
 This is for what you can and can't do with the wardrobe!
 
