@@ -19,7 +19,7 @@ This is for what you can and can't do with the wardrobe!
 
 ### What you CAN'T do:
 - Don't make closed-source versions, please share any changes you made to us! You will be put in the credits too 
-- Don't give credits for the original scripts! This is obvious!
+- Please give credits for the original scripts! This is obvious!
 - Don't sell this! It's not cool to rip people off!
 
 # Credits:
