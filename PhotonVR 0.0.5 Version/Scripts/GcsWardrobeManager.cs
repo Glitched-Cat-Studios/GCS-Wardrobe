@@ -83,8 +83,25 @@ namespace GlitchedCatStudios.Wardrobe
             StartCoroutine(Login());
         }
 
-        internal void ReloadWardrobe()
+        public void ReloadWardrobe()
         {
+            //Added this to stop cosmetics from duplicating
+            OwnedHeadCosmetics.Clear();
+            OwnedFaceCosmetics.Clear();
+            OwnedBodyCosmetics.Clear();
+            OwnedHoldableCosmetics.Clear();
+
+            HeadAbsTabCount = 0;
+            FaceAbsTabCount = 0;
+            BodyAbsTabCount = 0;
+            HoldAbsTabCount = 0;
+
+            Destroy(CosmeticInSlot1);
+            Destroy(CosmeticInSlot2);
+            Destroy(CosmeticInSlot3);
+
+            tabIndex = 0;
+
             StartCoroutine(Login());
         }
 

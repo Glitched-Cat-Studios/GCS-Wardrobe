@@ -5,10 +5,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace GlitchedCatStudios.Wardrobe.Purchasing
 {
     public class GcsWardrobePurchase : MonoBehaviour
     {
+        [Header("This is deprecated, and is no longer receiving updates.\nPlease use the shop system instead!")]
+        [Header("This script is made by Glitched Cat Studios!\n(Thanks 1stGen for fixing the duplicated cosmetics issue)")]
         [Header("Purchase")]
         public string itemId;
         public int price;
@@ -19,14 +26,12 @@ namespace GlitchedCatStudios.Wardrobe.Purchasing
         [Header("Get Cosmetic")]
         public TextMeshPro priceText;
 
-        private Playfablogin playfablogin;
-
         private bool hasPurchased = false;
+        private bool purchaseInProgress = false;
+        private bool hasLoadedCosmetics = false;
 
         private void Start()
         {
-            playfablogin = FindObjectOfType<Playfablogin>();
-
             priceText.text = price.ToString();
 
             StartCoroutine(LoadCosmetics());
@@ -34,22 +39,24 @@ namespace GlitchedCatStudios.Wardrobe.Purchasing
 
         IEnumerator LoadCosmetics()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitUntil(() => PlayFabClientAPI.IsClientLoggedIn());
 
-            GetUserInventoryRequest request = new GetUserInventoryRequest();
-            PlayFabClientAPI.GetUserInventory(request, OnGetInventorySuccess, OnError);
+            if (!hasLoadedCosmetics)
+            {
+                hasLoadedCosmetics = true;
+                GetUserInventoryRequest request = new GetUserInventoryRequest();
+                PlayFabClientAPI.GetUserInventory(request, OnGetInventorySuccess, OnError);
+            }
         }
 
         private void OnGetInventorySuccess(GetUserInventoryResult result)
         {
             foreach (var cosmetic in result.Inventory)
             {
-                if (cosmetic.CatalogVersion == catalogName)
+                if (cosmetic.CatalogVersion == catalogName && itemId == cosmetic.ItemId)
                 {
-                    if (itemId == cosmetic.ItemId)
-                    {
-                        gameObject.SetActive(false);
-                    }
+                    gameObject.SetActive(false);
+                    break;
                 }
             }
         }
@@ -61,45 +68,68 @@ namespace GlitchedCatStudios.Wardrobe.Purchasing
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == HandTag)
+            if (other.CompareTag(HandTag) && !purchaseInProgress && !hasPurchased)
             {
-                if (price <= playfablogin.coins)
-                {
-                    PurchaseItem();
-                }
-                else
-                {
-                    Debug.LogWarning("Warning: Insufficient funds for buying " + itemId);
-                    return;
-                }
+                PurchaseItem();
             }
         }
 
         private void PurchaseItem()
         {
-            if (!hasPurchased)
+            if (!hasPurchased && !purchaseInProgress)
             {
+                purchaseInProgress = true;
+
                 PlayFabClientAPI.PurchaseItem(new PurchaseItemRequest
                 {
                     CatalogVersion = catalogName,
                     ItemId = itemId,
                     VirtualCurrency = currencyCode,
                     Price = price
-
-                }, result => {
-
+                }, result =>
+                {
                     hasPurchased = true;
+                    purchaseInProgress = false;
 
                     GcsWardrobeManager.instance.ReloadWardrobe();
 
                     gameObject.SetActive(false);
 
-                }, error => {
-
+                }, error =>
+                {
+                    purchaseInProgress = false;
                     Debug.LogError(error.GenerateErrorReport());
-
                 });
             }
         }
     }
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(GcsWardrobePurchase))]
+    public class GcsWardrobePurchaseEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            GcsWardrobePurchase manager = (GcsWardrobePurchase)target;
+
+            GUILayout.Space(20);
+
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+
+            GUI.backgroundColor = new Color(0.8f, 0.8f, 1.0f);
+            if (GUILayout.Button("Check out the Shop System!", GUILayout.Width(175)))
+            {
+                Application.OpenURL("https://github.com/Glitched-Cat-Studios/GCS-Shop-System");
+            }
+
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            GUILayout.Space(10);
+        }
+    }
+#endif
 }
