@@ -27,4 +27,4 @@ This is for what you can and can't do with the wardrobe!
 - Anemunt - Fixed bugs and optimized the script
 - 1stGen - partially fixed the cosmetics duplicating
 
-Thanks for checking this out!
+Thanks for checking this out, and have a paw-some day!
