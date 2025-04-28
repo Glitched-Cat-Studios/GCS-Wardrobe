@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -91,7 +90,7 @@ namespace GlitchedCatStudios.Wardrobe.Purchasing
                     hasPurchased = true;
                     purchaseInProgress = false;
 
-                    GcsWardrobeManager.instance.ReloadWardrobe();
+                    foreach (var w in FindObjectsOfType<GcsWardrobeManager>()) { w.ReloadWardrobe(); }
 
                     gameObject.SetActive(false);
 
