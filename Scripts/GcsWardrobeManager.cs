@@ -8,6 +8,7 @@ using PlayFab;
 using Photon.VR;
 using Oculus.Platform.Models;
 using System;
+using System.Runtime.Serialization;
 
 
 
@@ -85,7 +86,11 @@ namespace GlitchedCatStudios.Wardrobe
         {
             if (instance == null) instance = this;
 
+#if UNITY_EDITOR && !PHOTONVR_004 && !PHOTONVR_005
+            throw new SymbolNotSetException("You have not set a scripting define symbol for GCS Wardrobe. Please make sure you set either PHOTONVR_004 or PHOTONVR_005 in Player Settings.");
+#else
             StartCoroutine(Login());
+#endif
         }
 
         public void ReloadWardrobe()
@@ -446,7 +451,7 @@ namespace GlitchedCatStudios.Wardrobe
                 cosData.Head = cosmetic.name;
             }
 #elif PHOTONVR_005
-             if (cosData[Head] == cosmetic.name)
+            if (cosData[Head] == cosmetic.name)
             {
                 PhotonVRManager.SetCosmetic(Head, string.Empty);
 
@@ -733,4 +738,13 @@ namespace GlitchedCatStudios.Wardrobe
         Body,
         Holdable
     }
+
+    public class SymbolNotSetException : Exception
+    {
+        public SymbolNotSetException() : base() { }
+        public SymbolNotSetException(string message) : base(message) { }
+        public SymbolNotSetException(string message, Exception innerException) : base(message, innerException) { }
+        protected SymbolNotSetException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    }
+
 }
