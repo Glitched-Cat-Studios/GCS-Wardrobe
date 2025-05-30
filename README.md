@@ -8,6 +8,7 @@ A wardrobe like Gorilla Tag's made by Glitched Cat Studios!
 - Easy to set up!
 - Uses PlayFab Inventory!
 - Compatible with not just one, but __two__ PhotonVR versions! ([0.0.4](https://github.com/fchb1239/PhotonVR/releases/tag/0.0.4) and [0.0.5](https://github.com/fchb1239/PhotonVR/releases/tag/0.0.5))
+- Unlimited number of wardrobe slots! (1, 2, 3, or even 10!)
 
 # Permissions
 This is for what you can and can't do with the wardrobe!
