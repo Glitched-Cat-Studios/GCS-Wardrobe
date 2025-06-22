@@ -1,5 +1,5 @@
 # GCS Wardrobe
-A wardrobe like Gorilla Tag's made by Glitched Cat Studios!
+A wardrobe like Gorilla Tag's, made by Glitched Cat Studios!
 
 ![image](https://github.com/Glitched-Cat-Studios/GCS-Wardrobe/assets/132825368/285d7b87-15bf-4896-b74f-9d7f3efd6041)
 
@@ -7,8 +7,8 @@ A wardrobe like Gorilla Tag's made by Glitched Cat Studios!
 - Head, Face, Body, and Holdable Tabs!
 - Easy to set up!
 - Uses PlayFab Inventory!
-- Compatible with not just one, but __two__ PhotonVR versions! ([0.0.4](https://github.com/fchb1239/PhotonVR/releases/tag/0.0.4) and [0.0.5](https://github.com/fchb1239/PhotonVR/releases/tag/0.0.5))
-- Unlimited number of wardrobe slots! (1, 2, 3, or even 10!)
+- Compatible with not just one, but __two__ PhotonVR versions! ([0.0.4](https://github.com/fchb1239/PhotonVR/releases/tag/0.0.4) and [0.0.5](https://github.com/fchb1239/PhotonVR/releases/tag/0.0.5)) ([FlowVR](https://github.com/rxxyn/FlowVR) and [MirrorVR](https://github.com/MirrorVR/MirrorVR) support coming soon!)
+- Unlimited number of wardrobe slots! (1, 2, 3, or even 10 if you want!)
 
 # Permissions
 This is for what you can and can't do with the wardrobe!
@@ -26,6 +26,6 @@ This is for what you can and can't do with the wardrobe!
 # Credits:
 - THeTechWiz5305 - Made the original script
 - Anemunt - Fixed bugs and optimized the script
-- 1stGen - partially fixed the cosmetics duplicating
+- 1stGen - partially fixed the cosmetics duplication bug
 
 Thanks for checking this out, and have a paw-some day!
